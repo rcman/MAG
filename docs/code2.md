@@ -10,4 +10,5 @@ Save the bytes from offset 0x11 to the end (0x11 through 0x2D6) into a file name
 2. Convert to PEM using OpenSSL:
 Run the following command in your terminal:
 
+openssl x509 -inform DER -in mag_cert.der -out mag_cert.pem -text
 
