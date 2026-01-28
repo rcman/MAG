@@ -1,0 +1,15 @@
+2026-01-25 20:47:36.177 [main] INFO  com.dnsserver.DnsServer - PlayStation DNS Server v1.0
+2026-01-25 20:47:36.178 [main] INFO  com.dnsserver.DnsServer - =============================
+2026-01-25 20:47:36.178 [main] INFO  com.dnsserver.DomainResolver - Loaded domain configuration from classpath
+2026-01-25 20:47:36.178 [main] INFO  com.dnsserver.DomainResolver - Server IP: 10.0.0.1
+2026-01-25 20:47:36.179 [main] INFO  com.dnsserver.DomainResolver - Upstream DNS: 8.8.8.8
+2026-01-25 20:47:36.179 [main] INFO  com.dnsserver.DomainResolver - Loaded 5 exact domains and 8 wildcard patterns
+2026-01-25 20:47:36.184 [main] ERROR com.dnsserver.DnsServer - Cannot bind to port 53: Address already in use
+2026-01-25 20:47:36.184 [main] ERROR com.dnsserver.DnsServer - Try running with sudo or use a port > 1024
+2026-01-25 20:47:36.185 [Thread-0] INFO  com.dnsserver.DnsServer - Shutting down...
+2026-01-25 20:47:36.186 [Thread-0] INFO  com.dnsserver.DnsServer - DNS Server stopped
+2026-01-25 20:47:36.186 [Thread-0] INFO  com.dnsserver.DnsServer - === DNS Server Statistics ===
+2026-01-25 20:47:36.186 [Thread-0] INFO  com.dnsserver.DnsServer - Total queries: 0
+2026-01-25 20:47:36.186 [Thread-0] INFO  com.dnsserver.DnsServer - Local responses: 0
+2026-01-25 20:47:36.186 [Thread-0] INFO  com.dnsserver.DnsServer - Forwarded queries: 0
+2026-01-25 20:47:36.186 [Thread-0] INFO  com.dnsserver.DnsServer - Errors: 0

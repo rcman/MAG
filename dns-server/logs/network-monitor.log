@@ -1,0 +1,12 @@
+2026-01-25 20:52:23.662 [main] INFO  com.networkmonitor.NetworkMonitor - Starting Network Traffic Monitor
+2026-01-25 20:52:23.719 [main] INFO  com.networkmonitor.NetworkMonitor - Loaded configuration from config.properties
+2026-01-25 20:52:23.720 [main] INFO  c.n.logging.TrafficLogger - Traffic logger started, writing to: ./logs
+2026-01-25 20:52:25.967 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Opened interface enp0s20f0u1 for capture
+2026-01-25 20:52:25.968 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Packet capture started on enp0s20f0u1
+2026-01-25 20:52:25.968 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - Monitoring started on enp0s20f0u1
+2026-01-25 20:53:29.209 [Traffic-Logger] INFO  c.n.logging.TrafficLogger - Logging to: ./logs/network-traffic-2026-01-25.log
+2026-01-25 20:54:04.736 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Packet capture stopped
+2026-01-25 20:54:04.737 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - Monitoring stopped
+2026-01-25 20:54:07.791 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - Shutting down...
+2026-01-25 20:54:07.791 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - Monitoring stopped
+2026-01-25 20:54:07.792 [AWT-EventQueue-0] INFO  c.n.logging.TrafficLogger - Traffic logger stopped. Total lines logged: 39
