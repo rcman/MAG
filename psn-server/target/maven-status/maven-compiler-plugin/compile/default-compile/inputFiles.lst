@@ -1,0 +1,7 @@
+/home/franco/mag3/psn-server/src/main/java/com/psnserver/http/HttpsServer.java
+/home/franco/mag3/psn-server/src/main/java/com/psnserver/http/RequestHandler.java
+/home/franco/mag3/psn-server/src/main/java/com/psnserver/auth/RsaHandler.java
+/home/franco/mag3/psn-server/src/main/java/com/psnserver/model/MockUser.java
+/home/franco/mag3/psn-server/src/main/java/com/psnserver/auth/MockAuthService.java
+/home/franco/mag3/psn-server/src/main/java/com/psnserver/PsnServer.java
+/home/franco/mag3/psn-server/src/main/java/com/psnserver/http/HttpServer.java

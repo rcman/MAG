@@ -1,0 +1,29 @@
+2026-01-27 07:06:38.848 [main] INFO  com.psnserver.PsnServer - =================================
+2026-01-27 07:06:38.856 [main] INFO  com.psnserver.PsnServer - PlayStation Network Mock Server
+2026-01-27 07:06:38.856 [main] INFO  com.psnserver.PsnServer - =================================
+2026-01-27 07:06:39.027 [main] INFO  com.psnserver.auth.RsaHandler - Generated new RSA key pair
+2026-01-27 07:06:39.028 [main] INFO  com.psnserver.auth.MockAuthService - Seeded test user: test_user / TestPass123!
+2026-01-27 07:06:39.044 [main] INFO  com.psnserver.http.HttpServer - HTTP Server started on port 80
+2026-01-27 07:06:39.101 [main] INFO  com.psnserver.http.HttpsServer - Loaded existing keystore
+2026-01-27 07:06:39.120 [main] INFO  com.psnserver.http.HttpsServer - HTTPS Server started on port 443 (TLS enabled)
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer - 
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer - Server is running!
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer - HTTP  Port: 80
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer - HTTPS Port: 443 (TLS enabled)
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer - 
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer - Default test credentials:
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer -   Username: test_user
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer -   Password: TestPass123!
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer -   Online ID: TestPlayer
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer - 
+2026-01-27 07:06:39.121 [main] INFO  com.psnserver.PsnServer - Press Ctrl+C to stop.
+2026-01-27 07:07:19.036 [pool-2-thread-1] INFO  com.psnserver.http.HttpServer - Request from 192.168.10.201: GET /update/ps3/list/us/ps3-updatelist.txt HTTP/1.1
+2026-01-27 07:07:19.036 [pool-2-thread-1] INFO  com.psnserver.http.RequestHandler - Update check request: /update/ps3/list/us/ps3-updatelist.txt
+2026-01-27 07:07:25.466 [pool-3-thread-1] WARN  com.psnserver.http.HttpsServer - SSL handshake failed from 192.168.10.201: (certificate_unknown) Received fatal alert: certificate_unknown
+2026-01-27 07:07:26.657 [pool-2-thread-2] INFO  com.psnserver.http.HttpServer - Request from 192.168.10.201: GET /update/ps3/list/us/ps3-updatelist.txt HTTP/1.1
+2026-01-27 07:07:26.657 [pool-2-thread-2] INFO  com.psnserver.http.RequestHandler - Update check request: /update/ps3/list/us/ps3-updatelist.txt
+2026-01-27 07:07:28.238 [pool-3-thread-2] WARN  com.psnserver.http.HttpsServer - SSL handshake failed from 192.168.10.201: (certificate_unknown) Received fatal alert: certificate_unknown
+2026-01-27 07:07:29.105 [pool-3-thread-3] WARN  com.psnserver.http.HttpsServer - SSL handshake failed from 192.168.10.201: (certificate_unknown) Received fatal alert: certificate_unknown
+2026-01-27 07:07:46.829 [Thread-0] INFO  com.psnserver.PsnServer - Shutting down...
+2026-01-27 07:07:46.829 [Thread-0] INFO  com.psnserver.http.HttpServer - HTTP Server stopped
+2026-01-27 07:07:46.829 [Thread-0] INFO  com.psnserver.http.HttpsServer - HTTPS Server stopped

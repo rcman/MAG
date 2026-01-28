@@ -1,0 +1,12 @@
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/logging/TrafficLogger.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/dhcp/DhcpPacket.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/parser/TcpParser.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/capture/PacketCapture.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/parser/DnsParser.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/parser/UdpParser.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/gui/MonitorDashboard.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/capture/PacketHandler.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/parser/HttpParser.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/dhcp/DhcpServer.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/NetworkMonitor.java
+/home/franco/mag3/network-monitor/src/main/java/com/networkmonitor/dhcp/DhcpLease.java

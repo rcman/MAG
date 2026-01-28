@@ -1,0 +1,4 @@
+[2026-01-25 20:56:11.598] DNS QUERY | 10.0.0.166 -> 10.0.0.1 | fus01.ps3.update.playstation.net (A)
+[2026-01-25 20:56:11.600] DNS RESPONSE | 10.0.0.1 -> 10.0.0.166 | Query: fus01.ps3.update.playstation.net (A) | Answers: 10.0.0.1
+[2026-01-25 20:56:11.602] TCP SYN | 10.0.0.166:61028 -> 10.0.0.1:80 | New connection | HTTP
+[2026-01-25 20:56:11.603] TCP ACK,RST | 10.0.0.1:80 -> 10.0.0.166:61028 | Reset | HTTP
