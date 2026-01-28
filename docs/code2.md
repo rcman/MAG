@@ -12,3 +12,5 @@ Run the following command in your terminal:
 
 openssl x509 -inform DER -in mag_cert.der -out mag_cert.pem -text
 
+This will produce a standard certificate file that most modern software can read, despite the weak 512-bit key.
+Would you like me to identify the specific signature bytes (the encrypted hash) at the end of the file as well?
