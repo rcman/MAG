@@ -1,0 +1,23 @@
+2026-01-27 07:15:59.940 [main] INFO  com.psnserver.PsnServer - =================================
+2026-01-27 07:15:59.941 [main] INFO  com.psnserver.PsnServer - PlayStation Network Mock Server
+2026-01-27 07:15:59.941 [main] INFO  com.psnserver.PsnServer - =================================
+2026-01-27 07:16:00.064 [main] INFO  com.psnserver.auth.RsaHandler - Generated new RSA key pair
+2026-01-27 07:16:00.065 [main] INFO  com.psnserver.auth.MockAuthService - Seeded test user: test_user / TestPass123!
+2026-01-27 07:16:00.090 [main] INFO  com.psnserver.http.HttpServer - HTTP Server started on port 80
+2026-01-27 07:16:00.092 [main] INFO  com.psnserver.http.HttpsServer - Generating self-signed certificate...
+2026-01-27 07:16:00.357 [main] INFO  com.psnserver.http.HttpsServer - Generated self-signed certificate
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.http.HttpsServer - HTTPS Server started on port 443 (TLS enabled)
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer - 
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer - Server is running!
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer - HTTP  Port: 80
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer - HTTPS Port: 443 (TLS enabled)
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer - 
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer - Default test credentials:
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer -   Username: test_user
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer -   Password: TestPass123!
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer -   Online ID: TestPlayer
+2026-01-27 07:16:00.422 [main] INFO  com.psnserver.PsnServer - 
+2026-01-27 07:16:00.423 [main] INFO  com.psnserver.PsnServer - Press Ctrl+C to stop.
+2026-01-27 07:17:30.568 [Thread-0] INFO  com.psnserver.PsnServer - Shutting down...
+2026-01-27 07:17:30.569 [Thread-0] INFO  com.psnserver.http.HttpServer - HTTP Server stopped
+2026-01-27 07:17:30.569 [Thread-0] INFO  com.psnserver.http.HttpsServer - HTTPS Server stopped

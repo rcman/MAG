@@ -1,0 +1,35 @@
+2026-01-25 20:01:00.281 [main] INFO  com.networkmonitor.NetworkMonitor - Starting Network Traffic Monitor
+2026-01-25 20:01:00.336 [main] INFO  com.networkmonitor.NetworkMonitor - Loaded configuration from config.properties
+2026-01-25 20:01:00.337 [main] INFO  c.n.logging.TrafficLogger - Traffic logger started, writing to: ./logs
+2026-01-25 20:01:00.492 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Using interface: wlo1 (null)
+2026-01-25 20:03:34.926 [main] INFO  com.networkmonitor.NetworkMonitor - Starting Network Traffic Monitor
+2026-01-25 20:03:34.985 [main] INFO  com.networkmonitor.NetworkMonitor - Loaded configuration from config.properties
+2026-01-25 20:03:34.986 [main] INFO  c.n.logging.TrafficLogger - Traffic logger started, writing to: ./logs
+2026-01-25 20:03:35.154 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Auto-detected interface: enp0s20f0u1 (null)
+2026-01-25 20:03:41.701 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Opened interface enp0s20f0u1 for capture
+2026-01-25 20:03:41.702 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Packet capture started on enp0s20f0u1
+2026-01-25 20:03:41.703 [AWT-EventQueue-0] INFO  com.networkmonitor.dhcp.DhcpServer - DHCP Server initialized: range 10.0.0.10-10.0.0.200, gateway 10.0.0.1
+2026-01-25 20:03:41.712 [AWT-EventQueue-0] INFO  com.networkmonitor.dhcp.DhcpServer - DHCP server started on port 67
+2026-01-25 20:03:41.712 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - DHCP server started
+2026-01-25 20:03:41.713 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - Monitoring started on enp0s20f0u1
+2026-01-25 20:04:12.283 [Traffic-Logger] INFO  c.n.logging.TrafficLogger - Logging to: ./logs/network-traffic-2026-01-25.log
+2026-01-25 20:05:33.503 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Packet capture stopped
+2026-01-25 20:05:33.504 [AWT-EventQueue-0] INFO  com.networkmonitor.dhcp.DhcpServer - DHCP server stopped
+2026-01-25 20:05:33.504 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - Monitoring stopped
+2026-01-25 20:05:37.587 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Opened interface enp86s0 for capture
+2026-01-25 20:05:37.587 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Packet capture started on enp86s0
+2026-01-25 20:05:37.587 [AWT-EventQueue-0] INFO  com.networkmonitor.dhcp.DhcpServer - DHCP Server initialized: range 10.0.0.10-10.0.0.200, gateway 10.0.0.1
+2026-01-25 20:05:37.588 [AWT-EventQueue-0] INFO  com.networkmonitor.dhcp.DhcpServer - DHCP server started on port 67
+2026-01-25 20:05:37.589 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - DHCP server started
+2026-01-25 20:05:37.589 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - Monitoring started on enp86s0
+2026-01-25 20:06:35.676 [main] INFO  com.networkmonitor.NetworkMonitor - Starting Network Traffic Monitor
+2026-01-25 20:06:35.729 [main] INFO  com.networkmonitor.NetworkMonitor - Loaded configuration from config.properties
+2026-01-25 20:06:35.730 [main] INFO  c.n.logging.TrafficLogger - Traffic logger started, writing to: ./logs
+2026-01-25 20:06:35.885 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Using interface: wlo1 (null)
+2026-01-25 20:06:42.717 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Opened interface enp0s20f0u1 for capture
+2026-01-25 20:06:42.718 [AWT-EventQueue-0] INFO  c.n.capture.PacketCapture - Packet capture started on enp0s20f0u1
+2026-01-25 20:06:42.719 [AWT-EventQueue-0] INFO  com.networkmonitor.dhcp.DhcpServer - DHCP Server initialized: range 10.0.0.10-10.0.0.200, gateway 10.0.0.1
+2026-01-25 20:06:42.735 [AWT-EventQueue-0] INFO  com.networkmonitor.dhcp.DhcpServer - DHCP server started on port 67
+2026-01-25 20:06:42.736 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - DHCP server started
+2026-01-25 20:06:42.739 [AWT-EventQueue-0] INFO  c.n.gui.MonitorDashboard - Monitoring started on enp0s20f0u1
+2026-01-25 20:06:54.659 [Traffic-Logger] INFO  c.n.logging.TrafficLogger - Logging to: ./logs/network-traffic-2026-01-25.log
