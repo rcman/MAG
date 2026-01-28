@@ -39,3 +39,8 @@ Cryptographic Details
 • Signature Size: 2048-bit (256 bytes)
 • Observation: While the game's key is weak (512-bit), the Root CA that signed it used a strong 2048-bit key.
 Technical Summary Table
+
+Here are the specific Modulus (N) and Exponent (e) bytes extracted from the certificate data within the dump.
+RSA Public Key Components
+Modulus (\bm{N}) - 512-bit (64 bytes):
+This is the large number derived from the two primes. In the hex dump, this is located inside the bit string starting at offset 0x17D.
