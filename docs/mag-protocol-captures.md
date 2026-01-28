@@ -147,12 +147,16 @@ PS3 (Client)                                    Server
 
 ## 5. Response Attempts
 
-### 0x24 Response Tested
+### 0x24 Responses Tested
 
-```
-24 00 00 02 00 00 00 00
-```
-**Result:** Triggers 0x20 message from client
+| Response | Hex | Result |
+|----------|-----|--------|
+| None (empty) | - | Client waits indefinitely, no 0x20 sent |
+| Simple ACK (8 bytes) | `24 00 00 02 00 00 00 00` | Triggers 0x20, then disconnect |
+| Mirror header (16 bytes) | `24 08 00 02 00 00 00 00 00 00 00 00 00 00 00 00` | Triggers 0x20, then disconnect |
+| Type 2 + fields | `24 04 00 02 00 70 00 03 00 00 06 00 04 01 00 00` | Triggers 0x20, then disconnect |
+
+**Conclusion:** Any response triggers 0x20, but client expects proper server certificate.
 
 ### 0x20 Responses Tested
 
@@ -166,6 +170,10 @@ PS3 (Client)                                    Server
 | DNAS Success | `01 00 00 00` | Disconnect |
 | DNAS + prefix | `20 01 00 00 00` | Disconnect |
 | Echo + DNAS | `20 01 00 01 01 00 00 00` | Disconnect |
+| Response ID 02 | `20 02 00 01` | Disconnect |
+| Echo exact | `20 01 00 01` | Disconnect |
+
+**Conclusion:** None of the 0x20 responses work - likely because 0x24 handshake isn't complete.
 
 ---
 
@@ -210,30 +218,96 @@ PS3 (Client)                                    Server
 
 ## 9. Files Generated
 
+### Capture Files
 | File | Description |
 |------|-------------|
 | `mag-captures/mag_capture_*.log` | Session logs with hex dumps |
 | `mag-captures/mag_capture_*.bin` | Raw binary captures |
 | `mag-captures/packet_*_recv.bin` | Individual received packets |
 | `mag-captures/packet_*_sent.bin` | Individual sent packets |
+| `mag-captures/mag_v2_*.log` | Protocol v2 server logs |
+| `mag-captures/mag_debug_*.log` | Debug server logs |
+
+### Tools Created
+| File | Description |
+|------|-------------|
+| `mag-listener.py` | Simple TCP listener, captures raw data |
+| `mag-server.py` | Basic server with response modes |
+| `mag-server2.py` | Advanced server with 0x24/0x20 handling |
+| `mag-debug.py` | Interactive protocol debugger |
+
+### Usage
+
+```bash
+# Simple capture
+sudo python3 mag-listener.py
+
+# Response testing
+sudo python3 mag-server2.py
+
+# Interactive debugging
+sudo python3 mag-debug.py
+```
 
 ---
 
-## 10. Next Steps for Revival
+## 10. Protocol Behavior Summary
 
-1. **Implement proper certificate response** - Server needs to send valid certificate back
+### Key Observations
 
-2. **Study medius-crypto** - https://github.com/hashsploit/medius-crypto
+1. **0x24 Response Required**
+   - If server sends NO response to 0x24, client waits indefinitely
+   - If server sends ANY response (even wrong), client proceeds to 0x20
+   - Client always disconnects after 0x20 exchange
 
-3. **Contact PSONE community** - https://discord.com/invite/uhZuGX9
+2. **Certificate Exchange is Blocking**
+   - Simple ACK responses don't complete the handshake
+   - Client likely expects a real server certificate signed by SCERT
+   - Without proper cert exchange, 0x20 will always fail
+
+3. **0x20 Message Purpose**
+   - Sent immediately after receiving any 0x24 response
+   - Format: `20 01 00 01` (4 bytes)
+   - Likely a "waiting for handshake completion" or session request
+   - All tested responses result in disconnect
+
+### Protocol State Machine
+
+```
+[Client]                              [Server]
+    |                                     |
+    |------ 0x24 (Certificate) --------->|
+    |                                     |
+    |<----- 0x24 (Server Cert?) ---------|  <-- We fail here
+    |                                     |
+    |------ 0x20 (Session Request?) ---->|
+    |                                     |
+    |<----- 0x20 (Session Response?) ----|  <-- Never succeeds
+    |                                     |
+    |       [Continue to game...]         |
+```
+
+---
+
+## 11. Next Steps for Revival
+
+1. **Implement proper certificate response** - Server needs to send valid certificate back, not just header ACK
+
+2. **Study medius-crypto** - https://github.com/hashsploit/medius-crypto for encryption/certificate handling
+
+3. **Contact PSONE community** - https://discord.com/invite/uhZuGX9 - Share these captures
 
 4. **Analyze Clank project** - https://github.com/hashsploit/clank for Medius protocol handling
 
-5. **DNAS bypass** - May require CFW or certificate injection
+5. **DNAS bypass** - May require CFW or certificate injection on PS3
+
+6. **Find original PCAPs** - Server certificates from 2010-2014 captures could help
+
+7. **Reverse engineer client** - Analyze MAG EBOOT to understand expected response format
 
 ---
 
-## 11. Resources
+## 12. Resources
 
 - **PSONE (PS Online Network Emulated):** https://www.psone.online/home
 - **Clank (Medius Server):** https://github.com/hashsploit/clank
@@ -242,4 +316,7 @@ PS3 (Client)                                    Server
 
 ---
 
+---
+
 *Documentation compiled from packet captures on January 27, 2026*
+*Last updated: January 27, 2026 - Added protocol behavior analysis and response testing results*
