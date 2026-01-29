@@ -9,3 +9,15 @@ In your specific case with the custom headers, the conversation likely looks lik
 4. Server: "Let's encrypt." -> Type 0x27 (ChangeCipherSpec)
 2. The 0x25 Packet Structure
 You need to construct a binary packet that mimics the one you found, but with your own data.
+
+3. The "Trust" Problem (Crucial)
+You cannot just send any certificate. The PS3 has the SCERT Root CA Public Key hardcoded in the EBOOT or firmware. It uses that key to verify the certificate you send.
+• If you send a self-signed cert: The PS3 will likely drop the connection immediately because the signature validation will fail.
+• The Fix: You will eventually need to patch the EBOOT to disable certificate verification (replace the "Verify" function with return true), OR replace the embedded Root Key with your own.
+For now, let's just build the packet so you can see if the PS3 receives it.
+4. Python Script: Generating the Response
+This script generates a temporary self-signed certificate, wraps it in the Sony header, and prepares it for sending.
+
+
+
+
