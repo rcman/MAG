@@ -1,0 +1,101 @@
+This is a massive but exciting undertaking. MAG was unique because of its 256-player architecture, meaning the server infrastructure was complex.
+Since you are building an emulator, you need to understand exactly where that 0x24 packet fits into the conversation.
+Here is the technical reality of what you are looking at and the roadmap to emulate the handshake.
+1. The "Wrapper" Protocol
+The most important detail in your hex dump is the first byte: 0x24.
+Standard SSL/TLS packets start with 0x16 (Handshake). Your packet starts with 0x24. This proves MAG uses a custom UDP/TCP wrapper.
+• The Game (Client) doesn't just open an SSL connection.
+• The Game creates an SSL packet in memory, wraps it with a Sony-specific header (24 D4 02...), and sends it over the wire.
+• Your Emulator (Server) must:
+1. Listen on the port (likely UDP 3658 or TCP 443/5223).
+2. Strip off the first ~17 bytes (the custom header).
+3. Feed the remaining data (the X.509 cert) into an OpenSSL context.
+4. Take the OpenSSL response, wrap it in a server-side header, and send it back.
+2. Searching for Logs (The "Rosetta Stone")
+You mentioned searching for old router logs. This is clever, but you should refine your search terms. Standard router logs won't help, but Proxy Logs will.
+Back in 2010-2013, cheaters and researchers used tools like Cain & Abel, Charles Proxy, or SKFU's Proxy to sniff PS3 traffic.
+Search for these specific file types or forum threads:
+• "MAG" PS3 "SKFU" log
+• "MAG" packet capture or .pcap
+• "Zipper Interactive" server ip
+• PS3 "DNAS" logs (The authentication system usually relied on DNAS).
+3. Immediate Next Step: The "Listener" Script
+To make progress, you don't need the full game server code yet. You just need a script that acknowledges this packet so the PS3 thinks the server is there.
+I have written a Python script below. Run this on your PC, point your PS3's DNS/IP to your PC, and see if the game sends the 0x24 packet to you.
+
+import socket
+import struct
+import ssl
+
+# Configuration
+HOST = '0.0.0.0'
+PORT = 3658  # Default MAG UDP port, might also use TCP 443 or 5223
+
+def parse_sony_header(data):
+    # Based on your hex dump
+    msg_type = data[0] # 0x24
+    payload_len = struct.unpack('<H', data[1:3])[0] # Little Endian length
+    
+    print(f"[+] Header Decoded: Type={hex(msg_type)}, Payload Length={payload_len}")
+    return data[17:] # Return everything after the 17-byte header
+
+def start_server():
+    print(f"[*] MAG Emulation Server listening on {PORT}...")
+    
+    # MAG is heavily UDP based, but the handshake might be TCP. 
+    # Let's try TCP first for the SSL handshake.
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind((HOST, PORT))
+    sock.listen(1)
+
+    while True:
+        conn, addr = sock.accept()
+        print(f"[!] Connection from {addr}")
+        
+        try:
+            data = conn.recv(4096)
+            if not data:
+                continue
+
+            # 1. Check if it's the packet you found
+            if data[0] == 0x24:
+                print("[!] RECEIVED CLIENT CERTIFICATE PACKET (Type 0x24)")
+                
+                # 2. Extract the SSL Payload
+                ssl_payload = parse_sony_header(data)
+                
+                # Save it to check if it matches your hex dump
+                with open("captured_handshake.bin", "wb") as f:
+                    f.write(ssl_payload)
+                print("[+] Saved inner SSL payload to captured_handshake.bin")
+
+                # 3. EMPIRICAL TESTING:
+                # The server usually responds with a ServerHello.
+                # Since we are emulating, we need to know what Header Type
+                # the server uses. It's often 0x25 or 0x28.
+                
+                # Placeholder response to see if PS3 disconnects or hangs
+                # (This is where the real RE work begins)
+                response_header = b'\x25\x00\x00' # Guessing Type 0x25
+                conn.send(response_header)
+                
+            else:
+                print(f"[?] Unknown packet type: {hex(data[0])}")
+                print(data.hex()[:64])
+
+        except Exception as e:
+            print(f"[-] Error: {e}")
+            conn.close()
+
+if __name__ == "__main__":
+    start_server()
+
+4. Strategic Advice: Static Analysis
+Since the servers are dead, we can't capture new packets. Your best source of truth is the game code itself.
+Do you have the ability to decrypt the EBOOT.BIN (the game executable)?
+• If you open the decrypted EBOOT in a tool like Ghidra or IDA Pro, search for the immediate value 0x24.
+• You will likely find a switch statement that handles network messages.
+• Look at the case 0x24: block. It will show you exactly what the client expects the server to send back next.
+Would you like me to explain how to search for that specific switch case in Ghidra if you have the file?
+
+
