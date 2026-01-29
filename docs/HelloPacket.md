@@ -143,3 +143,72 @@ Check the Database: Ensure your Accounts table isn't restricted by AppID. Many P
 
 
 
+In the MAPS.cs file you linked, the logic is highly modular. Because this project is based on the Horizon framework, the "Hello" packet is often handled by the base Medius component, while the Login logic is handled directly in this file.
+
+Here are the specific areas you need to look at:
+
+1. The Login Packet Handling (AppID Check)
+Scroll down to the Post method for MediusLoginRequest. It generally looks like this:
+
+[ServiceNode(MediusRequestType.Login)]
+public void Post(MediusLoginRequest request)
+{
+    // The server checks if the AppId is valid here
+    if (Program.Settings.AppIds.Contains(request.AppId)) 
+    {
+        // Proceed with login...
+    }
+}
+
+The "Solve": To make it universal, you would change that check to:
+if (true) // Accept any AppId
+Or, more safely, log the ID and then treat it as a valid one.
+
+2. The Password/Account Validation
+A few lines below the AppID check, you will find the database query:
+
+var account = Program.Database.GetAccount(request.Username);
+
+In the MAPS.cs file you linked, the logic is highly modular. Because this project is based on the Horizon framework, the "Hello" packet is often handled by the base Medius component, while the Login logic is handled directly in this file.
+
+Here are the specific areas you need to look at:
+
+1. The Login Packet Handling (AppID Check)
+Scroll down to the Post method for MediusLoginRequest. It generally looks like this:
+
+C#
+[ServiceNode(MediusRequestType.Login)]
+public void Post(MediusLoginRequest request)
+{
+    // The server checks if the AppId is valid here
+    if (Program.Settings.AppIds.Contains(request.AppId)) 
+    {
+        // Proceed with login...
+    }
+}
+The "Solve": To make it universal, you would change that check to:
+if (true) // Accept any AppId
+Or, more safely, log the ID and then treat it as a valid one.
+
+2. The Password/Account Validation
+A few lines below the AppID check, you will find the database query:
+
+C#
+var account = Program.Database.GetAccount(request.Username);
+In many "unsolved" versions of this server, the database query also filters by AppID. You should check your Database.cs file to see if GetAccount is checking the AppId column. If it is, even if the MAPS server accepts the connection, the database will return "Account Not Found" because the ID doesn't match.
+
+3. The "Hello" Handshake (If overridden)
+While the MAPS.cs file you linked primarily focuses on the Post (Login) methods, the Hello handshake is often located in the MediusManager or a base MediusComponent.
+
+If you want to verify if the Hello packet is working:
+
+Look for MediusHelloRequest in the project search.
+
+In the MediusHelloResponse being sent back, ensure the ResponseCode is strictly MediusResponseCode.Success.
+
+How to use this file to "Solve" your server:
+Match the Version: Ensure the MediusVersion string in the response matches what your PS Home build expects (e.g., v1.5).
+
+Logging: Add Console.WriteLine($"Login attempt from AppID: {request.AppId}"); at the start of the Post method.
+
+Rebuild: Since this is a .cs file, you must recompile the Horizon.SERVER project for these changes to take effect.
