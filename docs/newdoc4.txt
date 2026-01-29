@@ -109,3 +109,4 @@ with open("server_response_0x25.bin", "rb") as f:
 conn.send(response_data)
 print("[>>] Sent Server Certificate (0x25)")
 
+Watch the PS3:
