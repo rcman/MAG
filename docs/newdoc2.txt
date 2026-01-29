@@ -30,3 +30,32 @@ Since we know this packet contains a Client Certificate, the game must be callin
 Phase 4: What the Code will look like (The "Switch")
 Once you find the networking function, you are looking for a State Machine. It handles incoming and outgoing packets based on their ID.
 In the Decompile View, look for a structure that resembles this C-pseudocode:
+
+// This is what you are hunting for:
+void ProcessNetworkPacket(byte *buffer, int length) {
+    
+    // The first byte is the Message Type
+    byte msgType = buffer[0]; 
+
+    switch(msgType) {
+        
+        // This is your packet!
+        case 0x24: 
+            // The code here handles the Client Certificate.
+            // *CRITICAL*: Look at what it does next.
+            // Does it wait for a 0x25? Does it change state to 'AUTHENTICATED'?
+            SendClientCert(buffer); 
+            currentState = WAIT_FOR_SERVER_HELLO;
+            break;
+
+        case 0x25:
+            // This is likely the Server Response you need to emulate.
+            ProcessServerHello(buffer);
+            break;
+            
+        case 0x10:
+            // Heartbeat?
+            break;
+    }
+}
+
