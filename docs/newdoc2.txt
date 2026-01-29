@@ -59,3 +59,19 @@ void ProcessNetworkPacket(byte *buffer, int length) {
     }
 }
 
+Phase 5: The "Golden Ticket" Clue
+In your hex dump, the header length was D4 02 (Little Endian).
+However, the PS3 is Big Endian.
+This is a massive clue.
+If the packet on the wire is Little Endian, but the PS3 processor is Big Endian, the code must perform a byte-swap (bswap) before reading the length.
+Search Strategy C: The Byte Swap
+Search the code for a pattern where a 16-bit value is rotated 8 bits.
+Look for instructions like rlwinm (Rotate Left Word Immediate) combined with masking, often used to swap bytes.
+Any networking code doing this byte-swap on the 2nd and 3rd bytes of a buffer is almost certainly your packet handler.
+Summary Checklist for You
+1. [ ] Decrypt EBOOT.BIN to ELF.
+2. [ ] Load into Ghidra (PPC 64 Big Endian).
+3. [ ] Search Memory for Hex Bytes 00 70 00 03.
+4. [ ] If that fails, find references to sceSslWrite.
+5. [ ] Look for the switch statement controlling the flow.
+If you can find that switch statement, post the Decompiled C code here (or a screenshot), and I can tell you exactly what the server needs to send back.
