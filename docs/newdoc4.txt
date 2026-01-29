@@ -113,4 +113,5 @@ Watch the PS3:
 
 Case A (Success-ish): The PS3 sends another packet immediately (likely 0x26 or 0x10). This means it accepted the packet structure, even if it fails validation later.
 
+Case B (Fail): The PS3 disconnects immediately (FIN/RST). This means the Header Flags were wrong, or it hated the Certificate content.
 
