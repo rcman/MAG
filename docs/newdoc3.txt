@@ -30,3 +30,34 @@ If you want to verify it mathematically (e.g., to ensure only "pure" game dumps 
 • Without that Root Key (Modulus), this 256-byte block is just random noise.
 4. Code to Handle this Packet
 Since you are emulating the server, here is how you would process this specific signature block in Python.
+
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.x509 import load_der_x509_certificate
+
+def handle_mag_handshake(data):
+    # Strip the 17-byte custom Sony header we analyzed
+    cert_data = data[17:]
+    
+    # Load the certificate using cryptography library
+    try:
+        cert = load_der_x509_certificate(cert_data)
+        
+        print(f"[+] Client Identity: {cert.subject}")
+        print(f"[+] Issued By: {cert.issuer}")
+        
+        # EXTRACTING THE SIGNATURE (The bytes you pasted)
+        signature = cert.signature
+        print(f"[+] Signature Extracted: {signature.hex()[:32]}... (Length: {len(signature)})")
+
+        # IN A REAL SERVER: You would verify 'signature' here using the Root CA.
+        # IN YOUR EMULATOR: You can just say "Looks good!" and proceed.
+        
+        return True # Handshake Accepted
+        
+    except Exception as e:
+        print(f"[-] Invalid Certificate: {e}")
+        return False
+
+
+
