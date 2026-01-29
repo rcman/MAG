@@ -60,4 +60,7 @@ def handle_mag_handshake(data):
         return False
 
 
+Next Step for Emulation
+Now that you have confirmed the Client Certificate (Message 0x24), the handshake is paused until you send a reply.
+Would you like me to analyze the typical structure of a ServerHello packet so you can construct the bytes to send back to the PS3?
 
