@@ -1,0 +1,11 @@
+This is the critical "handshake" phase. In standard SSL/TLS, the server usually talks first (sending a ServerHello). However, since your client sent a Client Certificate (0x24), this indicates Mutual Authentication is happening. The game console has identified itself; now it demands the Server identify itself.
+The most logical response packet is Message Type 0x25 (Server Certificate).
+Here is the breakdown of the structure you need to build and the Python code to generate it.
+1. The Logical Flow (Mutual Auth)
+In your specific case with the custom headers, the conversation likely looks like this:
+1. Client (PS3): "Here is who I am (Cert)." -> Type 0x24
+2. Server (You): "Nice to meet you. Here is who I am (Cert)." -> Type 0x25
+3. Client: "I trust you." (Calculates Session Key) -> Type 0x26 (ClientKeyExchange)
+4. Server: "Let's encrypt." -> Type 0x27 (ChangeCipherSpec)
+2. The 0x25 Packet Structure
+You need to construct a binary packet that mimics the one you found, but with your own data.
