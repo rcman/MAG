@@ -110,3 +110,7 @@ conn.send(response_data)
 print("[>>] Sent Server Certificate (0x25)")
 
 Watch the PS3:
+
+Case A (Success-ish): The PS3 sends another packet immediately (likely 0x26 or 0x10). This means it accepted the packet structure, even if it fails validation later.
+
+
