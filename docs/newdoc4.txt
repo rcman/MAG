@@ -103,4 +103,9 @@ Run this script to generate the server_response_0x25.bin.
 
 Update your Listening Server (from the previous message) to read this file and send it:
 
+# Inside the if data[0] == 0x24: block
+with open("server_response_0x25.bin", "rb") as f:
+    response_data = f.read()
+conn.send(response_data)
+print("[>>] Sent Server Certificate (0x25)")
 
