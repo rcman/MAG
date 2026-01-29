@@ -99,5 +99,8 @@ if __name__ == "__main__":
     print("[SUCCESS] Packet 'server_response_0x25.bin' created.")
     print("Next step: Send this binary data back to the PS3 immediately after receiving 0x24.")
 
+Run this script to generate the server_response_0x25.bin.
+
+Update your Listening Server (from the previous message) to read this file and send it:
 
 
