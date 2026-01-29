@@ -212,3 +212,6 @@ Match the Version: Ensure the MediusVersion string in the response matches what 
 Logging: Add Console.WriteLine($"Login attempt from AppID: {request.AppId}"); at the start of the Post method.
 
 Rebuild: Since this is a .cs file, you must recompile the Horizon.SERVER project for these changes to take effect.
+
+
+Does your current server console show "Login Request Received" when you try to connect, or does it stay completely silent? If it's silent, the problem is still in the "Hello" handshake (before it even gets to the code in MAPS.cs).
