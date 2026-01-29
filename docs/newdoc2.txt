@@ -1,0 +1,32 @@
+This is the "surgical" part of the project. If you can find the code that builds this packet in the executable (EBOOT.BIN), you can read the logic backwards to see exactly what the server is supposed to send next.
+Here is your step-by-step guide to finding that logic in Ghidra.
+Phase 1: Preparation (Crucial)
+Before opening Ghidra, you must ensure your EBOOT.BIN is decrypted.
+• The Problem: PS3 executables on the disc are encrypted (NPDRM/Self). If you open the file and see random garbage or "SCE" headers but Ghidra can't analyze code, it's still encrypted.
+• The Fix: Use a tool like TrueAncestor Self Resigner or scetool to convert the EBOOT.BIN into a .ELF file.
+Phase 2: Loading into Ghidra
+1. New Project: Create a new project in Ghidra and import your decrypted .ELF file.
+2. Language Selection: The PS3 uses the PowerPC (PPC) 64-bit architecture (specifically Cell BE).
+• Select: PowerPC -> 64-bit -> Big Endian (PS3 is Big Endian).
+3. Analyze: When prompted, click "Yes" to auto-analyze. This will take a while (10-20 mins) as it maps out the thousands of functions.
+Phase 3: Hunting the "Magic Byte" (0x24)
+Searching for just 0x24 is dangerous because that value appears everywhere (it's just the number 36). We need to be more specific. We are looking for the code that writes 0x24 into the first byte of a buffer.
+Strategy A: Search for the Header Constant
+In your dump, the header contained specific flags: 00 70 00 03. This is likely a hardcoded protocol ID or version number.
+1. Go to the top menu: Search -> Memory.
+2. Set format to Hex String.
+3. Search for: 00 70 00 03
+4. Analyze Results:
+• If you find this sequence inside the "Instruction" or ".text" section, you have hit the jackpot.
+• Click the address. Look at the Decompile window (on the right).
+• You should see code that looks like it is preparing a buffer.
+Strategy B: Trace the SSL Import
+Since we know this packet contains a Client Certificate, the game must be calling the PS3's SSL library before sending this.
+1. Go to Window -> Symbol Tree.
+2. Type sceSsl in the filter.
+3. Look for imports like sceSslHandshake, sceSslWrite, or sceNet.
+4. Right-click on one of these functions (e.g., sceSslWrite) and select Show References to (or press Ctrl+Shift+F).
+5. This will list every place in the game code that sends encrypted data. One of these locations is responsible for wrapping that data in your 0x24 header.
+Phase 4: What the Code will look like (The "Switch")
+Once you find the networking function, you are looking for a State Machine. It handles incoming and outgoing packets based on their ID.
+In the Decompile View, look for a structure that resembles this C-pseudocode:
