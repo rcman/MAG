@@ -1,0 +1,19 @@
+Method 3: Protocol Header Mismatch
+You mentioned the "Server Hello seems to be an issue." It is possible the game expects a specific sequence of "Flags" in that 17-byte header that we haven't decoded yet.
+The packet 0x24 (Client Cert) had flags 01 00 70....
+The Server Response 0x25 might require different flags.
+How to verify this:
+Since we don't have logs, we have to look at the Ghidra decompilation of the packet parser again.
+1. Go to the switch(packet_type) statement you found earlier.
+2. Look at the code for case 0x25: (or whatever the generic "Receive Packet" function is).
+3. Does it check specific bytes?
+• Example: if (header[4] != 0x03) return ERROR;
+4. If you see hardcoded checks on the header bytes, update your Python script to match those requirements exactly.
+Specific Documentation/Resources
+You are asking for documentation on a proprietary, undocumented protocol. However, MAG was built using the Zipper Interactive engine (similar to SOCOM 4).
+The closest open-source reference you will find is the RPCS3 (PS3 Emulator) source code, specifically how they handle sceSsl HLE (High Level Emulation).
+• Search RPCS3 source: Look at /rpcs3/Emu/Cell/Modules/sceSsl.cpp.
+• This won't give you the MAG network protocol, but it will show you exactly how the PS3 constructs SSL contexts and what error codes it throws when a handshake fails.
+Immediate Action Plan:
+1. Check your Cert Algo: Re-generate your 0x25 certificate using SHA-1. (Quickest test).
+2. Patch the EBOOT: Load the ELF into Ghidra and search for sceSsl. If you can disable the verification check, the specific contents of your certificate won't matter anymore.
